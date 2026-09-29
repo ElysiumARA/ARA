@@ -1,296 +1,201 @@
 {
-  "$schema": "https://raw.githubusercontent.com/alrosado/azure-rmf-agent-json/refs/heads/main/schema/v1/ara.schema.json",
-  "system": "Contoso System",
-  "version": "1.0.0",
-  "customer": "Contoso",
-  "roles": [
-    {
-      "name": "System Administrator",
-      "key": "sysadmin",
-      "group": "ARA-System-Admins",
-      "active": true,
-      "description": "Responsible for administration of Contoso System resources.",
-      "members": [
-        "john.doe@example.com",
-        "john.deer@example.com"
-      ]
+  "$schema": "https://raw.githubusercontent.com/ElysiumARA/ARA/refs/heads/main/schema/v1/ara.schema.json",
+  "system": {
+    "name": "Contoso System",
+    "version": "1.0.0",
+    "customer": "Contoso"
+  },
+  "security": {
+    "classification": "Public",
+    "impactLevel": {
+      "name": "IL2",
+      "availability": "low",
+      "confidentiality": "low",
+      "integrity": "low"
     },
-    {
-      "name": "Security Administrator",
-      "key": "securityadmin",
-      "group": "ARA-Security-Admins",
-      "active": true,
-      "description": "Responsible for security monitoring and compliance activities."
-    }
-  ],
-  "environments": [
-    {
-      "key": "dev",
-      "resourceGroups": [
-        {
-          "name": "rg-ara-dev",
-          "roles": [
-            {
-              "role": "sysadmin",
-              "icamRole": "Contributor"
-            }
-          ],
-          "resources": [
-            {
-              "type": "Microsoft.Storage/storageAccounts",
-              "name": "staradev001",
-              "friendlyName": "Storage Account",
-              "description": "Stores generated RMF artifacts.",
-              "active": true,
-              "iacModule": {
-                "name": "storage",
-                "path": "modules/storage/storage.bicep"
+    "roles": [
+      {
+        "name": "System Administrator",
+        "key": "sysadmin",
+        "description": "Responsible for administration of Contoso System resources."
+      },
+      {
+        "name": "Security Administrator",
+        "key": "securityadmin",
+        "description": "Responsible for security monitoring and compliance activities."
+      }
+    ],
+    "stigs": []
+  },
+  "architecture": {
+    "environments": [
+      {
+        "key": "dev",
+        "resourceGroups": [
+          {
+            "name": "rg-ara-dev",
+            "roles": [
+              {
+                "key": "sysadmin",
+                "icamRoles": ["Contributor"]
+              }
+            ],
+            "resources": [
+              {
+                "type": "Microsoft.Storage/storageAccounts",
+                "name": "staradev001",
+                "friendlyName": "Storage Account",
+                "description": "Stores generated RMF artifacts.",
+                "iacModule": {
+                  "name": "storage",
+                  "uri": "modules/storage/storage.bicep"
+                },
+                "roles": [
+                  {
+                    "key": "sysadmin",
+                    "icamRoles": ["Storage Blob Data Contributor"]
+                  }
+                ],
+                "software": [ "Azure Storage" ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "test",
+        "resourceGroups": [
+          {
+            "name": "rg-ara-test",
+            "roles": [
+              {
+                "key": "sysadmin",
+                "icamRoles": ["Contributor"]
+              }
+            ],
+            "resources": [
+              {
+                "type": "Microsoft.Web/sites",
+                "name": "app-ara-test",
+                "friendlyName": "Web Application",
+                "description": "Hosts the Azure RMF Agent UI.",
+                "iacModule": {
+                  "name": "webapp",
+                  "uri": "modules/web/webapp.bicep"
+                },
+                "roles": [
+                  {
+                    "key": "sysadmin",
+                    "icamRoles": ["Contributor"]
+                  }
+                ],
+                "software": [ "Azure App Service" ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "prod",
+        "resourceGroups": [
+          {
+            "name": "rg-ara-prod",
+            "roles": [
+              {
+                "key": "sysadmin",
+                "icamRoles": ["Contributor"]
               },
-              "roles": [
-                {
-                  "role": "sysadmin",
-                  "icamRole": "Storage Blob Data Contributor"
-                }
-              ],
-              "software": [
-                {
-                  "name": "Azure Storage",
-                  "version": "Current",
-                  "description": "Azure Storage Account service."
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "key": "test",
-      "resourceGroups": [
-        {
-          "name": "rg-ara-test",
-          "roles": [
-            {
-              "role": "sysadmin",
-              "icamRole": "Contributor"
-            }
-          ],
-          "resources": [
-            {
-              "type": "Microsoft.Web/sites",
-              "name": "app-ara-test",
-              "friendlyName": "Web Application",
-              "description": "Hosts the Azure RMF Agent UI.",
-              "active": true,
-              "iacModule": {
-                "name": "webapp",
-                "path": "modules/web/webapp.bicep"
+              {
+                "key": "securityadmin",
+                "icamRoles": ["Security Admin"]
+              }
+            ],
+            "resources": [
+              {
+                "type": "Microsoft.KeyVault/vaults",
+                "name": "kv-ara-prod",
+                "friendlyName": "Key Vault",
+                "description": "Stores secrets and certificates.",
+                "iacModule": {
+                  "name": "keyvault",
+                  "uri": "modules/security/keyvault.bicep"
+                },
+                "roles": [
+                  {
+                    "key": "securityadmin",
+                    "icamRoles": ["Key Vault Administrator"]
+                  }
+                ],
+                "software": [ "Azure Key Vault" ]
               },
-              "roles": [
-                {
-                  "role": "sysadmin",
-                  "icamRole": "Contributor",
-                  "scope": "Resource"
-                }
-              ],
-              "software": [
-                {
-                  "name": "Azure App Service",
-                  "version": "Current",
-                  "description": "Application hosting platform."
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "key": "prod",
-      "resourceGroups": [
-        {
-          "name": "rg-ara-prod",
-          "roles": [
-            {
-              "role": "sysadmin",
-              "icamRole": "Contributor"
-            },
-            {
-              "role": "securityadmin",
-              "icamRole": "Security Admin"
-            }
-          ],
-          "resources": [
-            {
-              "type": "Microsoft.KeyVault/vaults",
-              "name": "kv-ara-prod",
-              "friendlyName": "Key Vault",
-              "description": "Stores secrets and certificates.",
-              "active": true,
-              "iacModule": {
-                "name": "keyvault",
-                "path": "modules/security/keyvault.bicep"
+              {
+                "type": "Microsoft.Sql/servers",
+                "name": "sql-ara-prod",
+                "friendlyName": "Azure SQL Server",
+                "description": "Hosts Azure RMF Agent data.",
+                "linkedResources": [
+                  {
+                    "resourceGroup": "rg-ara-prod",
+                    "type": "Microsoft.Sql/servers/databases",
+                    "name": "ara",
+                    "linkType": "Database"
+                  }
+                ],
+                "roles": []
               },
-              "roles": [
-                {
-                  "role": "securityadmin",
-                  "icamRole": "Key Vault Administrator",
-                  "scope": "Resource"
-                }
-              ],
-              "software": [
-                {
-                  "name": "Azure Key Vault",
-                  "version": "Current",
-                  "description": "Secrets management service."
-                }
-              ]
-            },
-            {
-              "type": "Microsoft.Sql/servers",
-              "name": "sql-ara-prod",
-              "friendlyName": "Azure SQL Server",
-              "description": "Hosts Azure RMF Agent data.",
-              "active": true,
-              "linkedResources": [
-                {
-                  "resourceGroup": "rg-ara-prod",
-                  "type": "Microsoft.Sql/servers/databases",
-                  "name": "ara",
-                  "linkType": "Database",
-                  "active": true
-                }
-              ],
-              "roles": []
-            },
-            {
-              "type": "Microsoft.Sql/servers/databases",
-              "name": "ara",
-              "friendlyName": "Azure SQL Database",
-              "description": "Hosts Azure RMF Agent data.",
-              "active": true,
-              "roles": []
-            }
-          ]
-        }
-      ]
-    }
-  ],
-  "software": [
-    {
-      "key": "ssms-19.3",
-      "name": "SQL Server Management Studio",
-      "version": "19.3",
-      "description": "Integrated environment for managing any SQL infrastructure."
-    },
-    {
-      "key": "azure-cli-2.58.",
-      "name": "Azure CLI",
-      "version": "2.58.0",
-      "description": "Cross-platform command-line tool to connect to Azure and execute administrative commands on Azure resources."
-    },
-    {
-      "key": "dotnet-framework-4.7.2",
-      "name": ".NET Framework",
-      "version": "4.7.2",
-      "description": "Framework for building client and server applications."
-    }
-  ],
-  "resourceTypes": [
-    {
-      "key": "Microsoft.Storage/storageAccounts",
-      "friendlyName": "Azure Storage Account"
-    },
-    {
-      "key": "Microsoft.KeyVault/vaults",
-      "friendlyName": "Azure Key Vault"
-    },
-    {
-      "key": "Microsoft.Sql/servers",
-      "friendlyName": "Azure SQL Server"
-    },
-    {
-      "key": "Microsoft.Sql/servers/databases",
-      "friendlyName": "Azure SQL Database"
-    }
-  ],
-  "stigs": [],
-  "strings": [
-    {
-      "key": "tests_version",
-      "value": "1.0"
-    },
-    {
-      "key": "tests_prefix",
-      "value": "ARA"
-    },
-    {
-      "key": "sit_testname",
-      "value": "Infrastructure Deployment Validation"
-    },
-    {
-      "key": "sit_steps",
-      "value": "Deploy all infrastructure and verify successful provisioning."
-    },
-    {
-      "key": "sit_outcome",
-      "value": "All resources deploy successfully."
-    },
-    {
-      "key": "at_resourcegroup_testname",
-      "value": "Resource Group Validation"
-    },
-    {
-      "key": "at_resourcegroup_steps",
-      "value": "Validate required resources exist."
-    },
-    {
-      "key": "at_resourcegroup_outcome",
-      "value": "All required resources are present."
-    },
-    {
-      "key": "at_resource_testname",
-      "value": "Resource Validation"
-    },
-    {
-      "key": "at_resource_steps",
-      "value": "Validate resource configuration."
-    },
-    {
-      "key": "at_resource_outcome",
-      "value": "Resource meets expected configuration."
-    },
-    {
-      "key": "at_database_testname",
-      "value": "Database Validation"
-    },
-    {
-      "key": "at_database_steps",
-      "value": "Validate database connectivity and schema."
-    },
-    {
-      "key": "at_database_outcome",
-      "value": "Database functions correctly."
-    },
-    {
-      "key": "ot_steps",
-      "value": "Execute operational workflow end-to-end."
-    },
-    {
-      "key": "ot_outcome",
-      "value": "Solution operates successfully."
-    },
-    {
-      "key": "ot_stig_testname",
-      "value": "STIG Compliance Review"
-    },
-    {
-      "key": "ot_stig_steps",
-      "value": "Validate STIG implementation and documentation."
-    },
-    {
-      "key": "ot_stig_outcome",
-      "value": "All required STIG controls are satisfied."
-    }
-  ]
+              {
+                "type": "Microsoft.Sql/servers/databases",
+                "name": "ara",
+                "friendlyName": "Azure SQL Database",
+                "description": "Hosts Azure RMF Agent data.",
+                "roles": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "resourceTypes": [
+      {
+        "key": "Microsoft.Storage/storageAccounts",
+        "friendlyName": "Azure Storage Account",
+        "provider": "Azure"
+      },
+      {
+        "key": "Microsoft.KeyVault/vaults",
+        "friendlyName": "Azure Key Vault",
+        "provider": "Azure"
+      },
+      {
+        "key": "Microsoft.Sql/servers",
+        "friendlyName": "Azure SQL Server",
+        "provider": "Azure"
+      },
+      {
+        "key": "Microsoft.Sql/servers/databases",
+        "friendlyName": "Azure SQL Database",
+        "provider": "Azure"
+      }
+    ],
+    "software": [
+      {
+        "key": "ssms-19.3",
+        "name": "SQL Server Management Studio",
+        "version": "19.3",
+        "description": "Integrated environment for managing any SQL infrastructure."
+      },
+      {
+        "key": "azure-cli-2.58.",
+        "name": "Azure CLI",
+        "version": "2.58.0",
+        "description": "Cross-platform command-line tool to connect to Azure and execute administrative commands on Azure resources."
+      },
+      {
+        "key": "dotnet-framework-4.7.2",
+        "name": ".NET Framework",
+        "version": "4.7.2",
+        "description": "Framework for building client and server applications."
+      }
+    ]
+  }
 }

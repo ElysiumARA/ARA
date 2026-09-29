@@ -987,6 +987,7 @@
                                 "type": "string",
                                 "description": "Provider of the resource type. This is used to track what provider is providing the resource type.",
                                 "examples": [
+                                    "Azure",
                                     "AzureUSGovernment",
                                     "AWS",
                                     "Microsoft",
