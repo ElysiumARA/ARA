@@ -1,0 +1,94 @@
+---
+document type: cmdlet
+external help file: AzureRMFAgent.Module.dll-Help.xml
+HelpUri: ''
+Locale: en-US
+Module Name: AzureRMFAgent
+ms.date: 09/15/2026
+PlatyPS schema version: 2024-05-01
+title: Add-ARAArtifactManifest
+---
+
+# Add-ARAArtifactManifest
+
+## SYNOPSIS
+
+{{ Fill in the Synopsis }}
+
+## SYNTAX
+
+### __AllParameterSets
+
+```
+Add-ARAArtifactManifest [-Artifacts <List`1[Artifact]>]
+```
+
+## ALIASES
+
+This cmdlet has the following aliases,
+  {{Insert list of aliases}}
+
+## DESCRIPTION
+
+{{ Fill in the Description }}
+
+## EXAMPLES
+
+### Example 1
+
+{{ Add example description here }}
+
+## PARAMETERS
+
+### -Artifacts
+
+{{ Fill Artifacts Description }}
+
+```yaml
+Type: System.Collections.Generic.List`1[AzureRMFAgent.Core.Artifacts.Artifact]
+DefaultValue: ''
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: true
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### CommonParameters
+
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
+-InformationAction, -InformationVariable, -OutBuffer, -OutVariable, -PipelineVariable,
+-ProgressAction, -Verbose, -WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
+
+## INPUTS
+
+### System.Collections.Generic.List`1[[AzureRMFAgent.Core.Artifacts.Artifact
+
+{{ Fill in the Description }}
+
+### System.Collections.Generic.List`1[[AzureRMFAgent.Core.Artifacts.Artifact, AzureRMFAgent.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+
+{{ Fill in the Description }}
+
+## OUTPUTS
+
+### AzureRMFAgent.Core.ARAResult
+
+{{ Fill in the Description }}
+
+## NOTES
+
+{{ Fill in the Notes }}
+
+## RELATED LINKS
+
+{{ Fill in the related links here }}
+
