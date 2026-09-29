@@ -1,6 +1,6 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "https://raw.githubusercontent.com/alrosado/azure-rmf-agent-json/refs/heads/main/schema/v1/compliance/controls.schema.json",
+    "$id": "https://raw.githubusercontent.com/ElysiumARA/ARA/refs/heads/main/schema/v1/compliance/controls.schema.json",
     "title": "Azure RMF Agent Controls schema",
     "version": "1.0.0",
     "description": "Canonical schema for Azure RMF Agent controls generation.",

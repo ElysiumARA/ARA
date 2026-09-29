@@ -150,13 +150,7 @@ Azure RMF Agent schemas are versioned to ensure compatibility between generated 
 #### Stable Version
 
 ```text
-https://github.com/alrosado/azure-rmf-agent-json/schema/v1/ara.schema.json
-```
-
-#### Latest Version
-
-```text
-https://github.com/alrosado/azure-rmf-agent-json/schema/latest/ara.schema.json
+https://raw.githubusercontent.com/ElysiumARA/ARA/refs/heads/main/schema/v1/ara.schema.json
 ```
 
 ### Versioning Strategy

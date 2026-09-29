@@ -1,6 +1,6 @@
 {
-  "$schema": "https://raw.githubusercontent.com/alrosado/azure-rmf-agent-json/refs/heads/main/schema/v1/artifacts/artifactContent.schema.json",
-  "$id": "https://raw.githubusercontent.com/alrosado/azure-rmf-agent-json/refs/heads/main/schema/v1/artifacts/artifact/ppsm.schema.json",
+  "$schema": "https://raw.githubusercontent.com/ElysiumARA/ARA/refs/heads/main/schema/v1/artifacts/artifactContent.schema.json",
+  "$id": "https://raw.githubusercontent.com/ElysiumARA/ARA/refs/heads/main/schema/v1/artifacts/artifact/ppsm.schema.json",
   "title": "Ports, Protocols, and Services Management (PPSM) Schema",
   "$comment": "1.0.0",
   "description": "Schema for defining and generating Ports, Protocols, and Services Management content as CSV data.",

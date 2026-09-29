@@ -1,6 +1,6 @@
 {
-  "$schema": "https://raw.githubusercontent.com/alrosado/azure-rmf-agent-json/refs/heads/main/schema/v1/artifacts/artifactContent.schema.json",
-  "$id": "https://raw.githubusercontent.com/alrosado/azure-rmf-agent-json/refs/heads/main/schema/v1/artifacts/artifact/srtm.schema.json",
+  "$schema": "https://raw.githubusercontent.com/ElysiumARA/ARA/refs/heads/main/schema/v1/artifacts/artifactContent.schema.json",
+  "$id": "https://raw.githubusercontent.com/ElysiumARA/ARA/refs/heads/main/schema/v1/artifacts/artifact/srtm.schema.json",
   "title": "Security Requirements Traceability Matrix (SRTM) Schema",
   "$comment": "1.0.0",
   "description": "Schema for defining and generating Security Requirements Traceability Matrix content as CSV data.",
